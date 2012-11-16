@@ -125,13 +125,13 @@ module RSpecStepwise
             unless success
               reporter.example_started(example)
               unless example.metadata[:pend_on_failure] || !example.metadata.has_key?(:pend_on_failure)
-              example.metadata[:pending] = true
+                example.metadata[:pending] = true
                 example.metadata[:execution_result][:pending_message] = "Previous step failed"
                 example.metadata[:execution_result][:started_at] = Time.now
                 example.instance_eval{ record_finished :pending, :pending_message => "Previous step failed" }
                 reporter.example_pending(example)
+                next
               end
-              next
             end
             succeeded = instance.with_indelible_ivars do
               example.run(instance, reporter)
