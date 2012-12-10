@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'rubygems/installer'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 require 'rake/rubygems'
-require 'hanna/rdoctask'
+#require 'hanna/rdoctask'
 require 'rspec/core/rake_task'
 require 'mailfactory'
 require 'net/smtp'
@@ -217,7 +217,7 @@ namespace :gem do
   task :install => [:needs_root, 'qa:sign_off']
   task :reinstall => [:needs_root, 'qa:sign_off']
 
-  package = Rake::GemPackageTask.new(RakeConfig[:gemspec]) {|t|
+  package = Gem::PackageTask.new(RakeConfig[:gemspec]) {|t|
     t.need_tar_gz = true
     t.need_tar_bz2 = true
   }
@@ -225,13 +225,14 @@ namespace :gem do
     file package_type => "rspec:check"
   end
 
-  Rake::RDocTask.new(:docs) do |rd|
-    rd.options += RakeConfig[:gemspec].rdoc_options
-    rd.rdoc_dir = 'rubydoc'
-    rd.rdoc_files.include(RakeConfig[:files][:code])
-    rd.rdoc_files.include(RakeConfig[:files][:docs])
-    rd.rdoc_files += (RakeConfig[:gemspec].extra_rdoc_files)
-  end
+  #TODO: uncomment this back in once rake gem conflict is resolved
+  #Rake::RDocTask.new(:docs) do |rd|
+    #rd.options += RakeConfig[:gemspec].rdoc_options
+    #rd.rdoc_dir = 'rubydoc'
+    #rd.rdoc_files.include(RakeConfig[:files][:code])
+    #rd.rdoc_files.include(RakeConfig[:files][:docs])
+    #rd.rdoc_files += (RakeConfig[:gemspec].extra_rdoc_files)
+  #end
   task :docs => ['rspec:doc']
 end
 

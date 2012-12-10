@@ -43,10 +43,10 @@ Gem::Specification.new do |spec|
 
   dev_deps = [
     ["rake-rubygems", ">= 0.2.0"],
-    ["hanna", "~> 0.1.0"],
+    #["hanna", ">= 0.1.0"],
     ["mailfactory", "~> 1.4.0"],
-    ["rspec", [">= 2.0"]],
-    ["bundler", ["~> 1.0.0"]],
+    ["rspec", [">= 2.8"]],
+    ["bundler", [">= 1.0.0"]],
     ["rcov", [">= 0"]]
   ]
   if spec.respond_to? :specification_version then
